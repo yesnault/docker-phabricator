@@ -18,8 +18,8 @@ RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysq
 ADD ./startup.sh /opt/startup.sh
 ADD ./installPhabricator.sh /opt/installPhabricator.sh
 
-ADD files/apache_vhost.conf /etc/apache2/sites-available/phabricator.conf
-ADD files/supervisord.conf /etc/
+ADD files/phabricator.conf /etc/apache2/sites-available/phabricator.conf
+#ADD files/supervisord.conf /etc/
  
 EXPOSE 3306 80 22
  
