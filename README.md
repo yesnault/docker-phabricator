@@ -27,3 +27,7 @@ Go to http://localhost.local:8081
 Docker HTTP listen on 8081 and ssh listen on 2244
 
 Mysql files are written on `/data/mysql` (described in run-server.sh)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yesnault/docker-phabricator/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
