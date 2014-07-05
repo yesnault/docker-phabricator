@@ -7,8 +7,9 @@ RUN apt-get update
 # Get Utils
 RUN apt-get install -y ssh wget vim less zip cron lsof
 RUN mkdir /var/run/sshd
-RUN sed -i -e 's/PermitRootLogin.*/PermitRootLogin yes/' '/etc/ssh/sshd_config'
-RUN echo 'root:docker' |chpasswd
+RUN useradd -d /home/admin -m -s /bin/bash admin
+RUN echo 'admin:docker' | chpasswd
+RUN echo 'root:docker' | chpasswd
  
 # Get Supervisor
 RUN apt-get install -y supervisor
