@@ -55,6 +55,7 @@ RUN ulimit -c 10000
 # Clean packages
 RUN apt-get clean
 
+VOLUME /opt/phabricator/conf/local
 EXPOSE 3306 80 22
 
 CMD ["/usr/bin/supervisord"]
