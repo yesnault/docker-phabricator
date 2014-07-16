@@ -1,6 +1,6 @@
 docker-phabricator
 ==================
-Dockerfile with ubuntu / mysql / phabricator
+Dockerfile with debian:jessie / mysql / phabricator
 
 
 Run
