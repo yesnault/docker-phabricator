@@ -17,5 +17,11 @@ cd /opt/
 git clone git://github.com/facebook/libphutil.git
 git clone git://github.com/facebook/arcanist.git
 git clone git://github.com/facebook/phabricator.git
-cd /opt/phabricator && ./bin/storage upgrade --force
 
+chmod 666 /opt/phabricator/conf/local/local.json
+
+# if container restart, fix mysql rights
+chown -R mysql:mysql /var/lib/docker
+
+cd /opt/phabricator && ./bin/storage upgrade --force
+cd /opt/phabricator && ./bin/phd restart

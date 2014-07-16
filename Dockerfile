@@ -2,14 +2,19 @@ FROM debian:jessie
 
 MAINTAINER Yvonnick Esnault <yvonnick@esnau.lt>
 
+ENV DEBIAN_FRONTEND noninteractive 
+ENV DEBCONF_NONINTERACTIVE_SEEN true
+
 RUN apt-get update
 
 # Get Utils
-RUN apt-get install -y ssh wget vim less zip cron lsof
+RUN apt-get install -y ssh wget vim less zip cron lsof sudo
 RUN mkdir /var/run/sshd
 RUN useradd -d /home/admin -m -s /bin/bash admin
 RUN echo 'admin:docker' | chpasswd
 RUN echo 'root:docker' | chpasswd
+RUN echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/admin
+RUN chmod 0440 /etc/sudoers.d/admin
 
 # Get Supervisor
 RUN apt-get install -y supervisor
@@ -27,13 +32,13 @@ RUN apt-get install -y php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd p
 # Git to retreive phabricator source
 RUN apt-get install -y git subversion
 
- # Install sendmail
+ # Install postfix
 RUN apt-get install -y postfix
 
 # Supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Enabled mod rewrite for phabticator
+# Enabled mod rewrite for phabricator
 RUN a2enmod rewrite
 RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
 RUN sed -i 's/\[mysqld\]/[mysqld]\nsql_mode=STRICT_ALL_TABLES/' /etc/mysql/my.cnf
