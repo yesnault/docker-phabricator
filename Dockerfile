@@ -8,7 +8,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 RUN apt-get update
 
 # Get Utils
-RUN apt-get install -y ssh wget vim less zip cron lsof sudo
+RUN apt-get install -y ssh wget vim less zip cron lsof sudo screen
 RUN mkdir /var/run/sshd
 RUN useradd -d /home/admin -m -s /bin/bash admin
 RUN echo 'admin:docker' | chpasswd
