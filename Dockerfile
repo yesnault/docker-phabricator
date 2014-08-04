@@ -29,8 +29,8 @@ RUN apt-get install -y mysql-server mysql-client libmysqlclient-dev
 RUN apt-get install -y apache2
 # Install php
 RUN apt-get install -y php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php5-cli php5-json php5-ldap
-# Git to retreive phabricator source
-RUN apt-get install -y git subversion
+# Install VCS binaries (git, mercurial, subversion) to pull sources and for phabricator use
+RUN apt-get install -y git subversion mercurial
 
  # Install postfix
 RUN apt-get install -y postfix
