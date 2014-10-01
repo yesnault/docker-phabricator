@@ -18,7 +18,7 @@ git clone https://github.com/yesnault/docker-phabricator.git
 ./run-server.sh
 ````
 
-Go to http://localhost.local:8081
+Go to http://localhost:8081
 
 Docker HTTP listen on 8081 and ssh listen on 2244
 
