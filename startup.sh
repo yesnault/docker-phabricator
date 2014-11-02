@@ -13,10 +13,12 @@ if [ ! -f /var/lib/mysql/ibdata1 ]; then
 	echo "GRANT ALL ON *.* TO admin@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql
 fi
 
-cd /opt/
-git clone git://github.com/facebook/libphutil.git
-git clone git://github.com/facebook/arcanist.git
-git clone git://github.com/facebook/phabricator.git
+cd /opt/libphutil && git pull
+cd /opt/arcanist && git pull
+cd /opt/phabricator && git pull
+
+mkdir -p /opt/phabricator/conf/local
+touch /opt/phabricator/conf/local/local.json
 
 chmod 666 /opt/phabricator/conf/local/local.json
 

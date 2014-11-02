@@ -5,35 +5,20 @@ MAINTAINER Yvonnick Esnault <yvonnick@esnau.lt>
 ENV DEBIAN_FRONTEND noninteractive 
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
-RUN apt-get update
-
 # Get Utils
-RUN apt-get install -y ssh wget vim less zip cron lsof sudo screen
-RUN mkdir /var/run/sshd
-RUN useradd -d /home/admin -m -s /bin/bash admin
-RUN echo 'admin:docker' | chpasswd
-RUN echo 'root:docker' | chpasswd
-RUN echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/admin
-RUN chmod 0440 /etc/sudoers.d/admin
+RUN apt-get update && apt-get install -y wget vim less zip cron lsof sudo screen
 
 # Get Supervisor
 RUN apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
 
-# Clean packages
-RUN apt-get clean
-
 # Install MySQL
 RUN apt-get install -y mysql-server mysql-client libmysqlclient-dev
-# Install Apache
-RUN apt-get install -y apache2
-# Install php
-RUN apt-get install -y php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php5-cli php5-json php5-ldap
+
+# Install Apache and php
+RUN apt-get install -y apache2 php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php5-cli php5-json php5-ldap
 # Install VCS binaries (git, mercurial, subversion) to pull sources and for phabricator use
 RUN apt-get install -y git subversion mercurial
-
- # Install postfix
-RUN apt-get install -y postfix
 
 # Supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -60,7 +45,6 @@ RUN ulimit -c 10000
 # Clean packages
 RUN apt-get clean
 
-VOLUME /opt/phabricator/conf/local
-EXPOSE 3306 80 22
+EXPOSE 80
 
 CMD ["/usr/bin/supervisord"]
