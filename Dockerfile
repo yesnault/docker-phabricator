@@ -25,8 +25,10 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Enabled mod rewrite for phabricator
 RUN a2enmod rewrite
+
 RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
-RUN sed -i 's/\[mysqld\]/[mysqld]\nsql_mode=STRICT_ALL_TABLES/' /etc/mysql/my.cnf
+RUN sed -i 's/\[mysqld\]/[mysqld]\n#\n# * Phabricator specific settings\n#\nsql_mode=STRICT_ALL_TABLES\nft_stopword_file=\/opt\/phabricator\/resources\/sql\/stopwords.txt\nft_min_word_len=3\ninnodb_buffer_pool_size=410M\n/' /etc/mysql/my.cnf
+
 ADD ./startup.sh /opt/startup.sh
 RUN chmod +x /opt/startup.sh
 
