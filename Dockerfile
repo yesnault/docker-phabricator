@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 # Get Utils
-RUN apt-get update && apt-get install -y wget vim less zip cron lsof sudo screen
+RUN apt-get update && apt-get install -y wget vim less zip cron lsof sudo screen dpkg
 
 # Get Supervisor
 RUN apt-get install -y supervisor
