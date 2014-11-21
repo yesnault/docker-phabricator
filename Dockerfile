@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Yvonnick Esnault <yvonnick@esnau.lt>
 
-ENV DEBIAN_FRONTEND noninteractive 
+ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 # Get Utils
