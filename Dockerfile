@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Yvonnick Esnault <yvonnick@esnau.lt>
 
-ENV DEBIAN_FRONTEND noninteractive 
+ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 # Get Utils
@@ -16,7 +16,7 @@ RUN mkdir -p /var/log/supervisor
 RUN apt-get install -y mysql-server mysql-client libmysqlclient-dev
 
 # Install Apache and php
-RUN apt-get install -y apache2 php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php5-cli php5-json php5-ldap
+RUN apt-get install -y apache2 php5 libapache2-mod-php5 php5-mcrypt php5-mysql php5-gd php5-dev php5-curl php5-cli php5-json php5-ldap php5-apcu
 # Install VCS binaries (git, mercurial, subversion) to pull sources and for phabricator use
 RUN apt-get install -y git subversion mercurial
 
