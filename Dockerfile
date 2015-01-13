@@ -44,6 +44,9 @@ RUN mkdir -p '/var/repo/'
 
 RUN ulimit -c 10000
 
+RUN apt-get remove -y exim4
+RUN apt-get install -y postfix
+
 # Clean packages
 RUN apt-get clean
 
