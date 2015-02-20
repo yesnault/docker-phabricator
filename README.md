@@ -9,6 +9,8 @@ Run
 docker run yesnault/docker-phabricator
 ```
 
+You have to wait a bit until the container finishes the preparation (creation of database).
+
 Build and run
 ---------------
 
