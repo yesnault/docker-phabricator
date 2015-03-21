@@ -1,0 +1,12 @@
+
+
+phabricator:
+    build: .
+    links: ['mysql']
+    ports: ['8081:80']
+    volumes:
+        - /data/phabricator/repo:/var/repo
+        - /data/phabricator/conf:/opt/phabricator/conf
+
+mysql:
+    build: mysql/
