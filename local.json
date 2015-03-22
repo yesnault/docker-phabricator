@@ -1,3 +1,6 @@
 {
-      "mysql.host": "database"
+      "storage.default-namespace": "default",
+      "mysql.host": "database",
+      "mysql.pass": "admin",
+      "mysql.user": "admin"
 }
