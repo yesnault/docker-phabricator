@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y wget vim less zip cron lsof sudo screen
 	mkdir -p /var/log/supervisor && \
 	a2enmod rewrite && \
 	sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf && \
-	sed -i 's/\[mysqld\]/[mysqld]\n#\n# * Phabricator specific settings\n#\nsql_mode=STRICT_ALL_TABLES\nft_stopword_file=\/opt\/phabricator\/resources\/sql\/stopwords.txt\nft_min_word_len=3\ninnodb_buffer_pool_size=410M\n/' /etc/mysql/my.cnf && \
+	sed -i "s/\[mysqld\]/[mysqld]\n#\n# * Phabricator specific settings\n#\nsql_mode=STRICT_ALL_TABLES\nft_stopword_file=\/opt\/phabricator\/resources\/sql\/stopwords.txt\nft_min_word_len=3\nft_boolean_syntax=' |-><()~*:\"\"\\&^'\ninnodb_buffer_pool_size=410M\n/" /etc/mysql/my.cnf && \
 	chmod +x /opt/startup.sh && \
 	cd /opt/ && git clone https://github.com/facebook/libphutil.git && \
 	cd /opt/ && git clone https://github.com/facebook/arcanist.git && \
