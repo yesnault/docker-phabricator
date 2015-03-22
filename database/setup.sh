@@ -16,5 +16,6 @@ echo "GRANT ALL ON *.* TO admin@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION; FLU
 cat /opt/phabricator/resources/sql/quickstart.sql | mysql
 
 # TODO: create a default admin account
+# TODO: address setup issues described in /config/issue/
 
 pkill -f mysqld

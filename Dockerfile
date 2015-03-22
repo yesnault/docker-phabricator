@@ -23,6 +23,8 @@ RUN     DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
             php5-json \
             php5-ldap \
             php5-mysql \
+            python-pygments \
+            sendmail \
             subversion \
             tar \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -46,6 +48,7 @@ RUN     ln -s /etc/apache2/sites-available/phabricator.conf \
 # Setup phabricator
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
+RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
 
 
 EXPOSE  80

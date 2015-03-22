@@ -7,3 +7,5 @@ sql_mode=STRICT_ALL_TABLES
 ft_stopword_file=/opt/phabricator/resources/sql/stopwords.txt
 ft_min_word_len=3
 innodb_buffer_pool_size=410M
+ft_boolean_syntax=' |-><()~*:""&^'
+max_allowed_packet=33554432
