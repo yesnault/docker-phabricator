@@ -3,7 +3,7 @@
 #
 
 FROM    debian:jessie
-MAINTAINER  Daniel Nephin <dnephin@gmail.com> 
+MAINTAINER  Daniel Nephin <dnephin@gmail.com>
 
 # TODO: review this dependency list
 RUN     DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \

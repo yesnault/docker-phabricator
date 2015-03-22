@@ -1,12 +1,15 @@
 
-
+#
+# Optional Volumes:
+#  - /opt/phabricator/conf - configuration
+#  - /var/repo - code repos
+#
+#
 phabricator:
     build: .
-    links: ['mysql']
+    links: ['database']
     ports: ['8081:80']
-    volumes:
-        - /data/phabricator/repo:/var/repo
-        - /data/phabricator/conf:/opt/phabricator/conf
 
-mysql:
-    build: mysql/
+
+database:
+    build: database/

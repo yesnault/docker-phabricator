@@ -2,8 +2,8 @@
 #
 # * Phabricator specific settings
 #
+[mysqld]
 sql_mode=STRICT_ALL_TABLES
-# TODO: get this
 ft_stopword_file=/opt/phabricator/resources/sql/stopwords.txt
 ft_min_word_len=3
 innodb_buffer_pool_size=410M
