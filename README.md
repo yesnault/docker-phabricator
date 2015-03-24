@@ -1,8 +1,8 @@
 docker-phabricator
 ==================
 A docker composition for Phabricator :
-- One container used by mysql
-- One container used by apache (pharicator)
+- One container used by mysql, see https://github.com/yesnault/docker-phabricator/tree/master/database
+- One container used by apache (phabricator)
 
 Run with image from hub.docker.com
 ----
