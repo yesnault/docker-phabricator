@@ -13,8 +13,9 @@ docker run --name databasePhabricator yesnault/docker-phabricator-mysql
 
 Run phabricator :
 ```
-docker run yesnault/docker-phabricator --link databasePhabricator:database
+docker run -p 8081:80 --link databasePhabricator:database yesnault/docker-phabricator 
 ```
+Go to http://localhost:8081
 
 
 Local Build and Run
