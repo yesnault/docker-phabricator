@@ -3,11 +3,14 @@
 #
 
 FROM    debian:jessie
-MAINTAINER  Daniel Nephin <dnephin@gmail.com>
+MAINTAINER  Yvonnick Esnault <yvonnick@esnau.lt>
 
-RUN     DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
-            curl \
-            mysql-server
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
+
+RUN   apt-get update && apt-get install -y \
+      curl \
+      mysql-server
 
 RUN     sed -i -e "s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" \
             /etc/mysql/my.cnf

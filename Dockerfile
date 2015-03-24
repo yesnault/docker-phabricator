@@ -3,10 +3,13 @@
 #
 
 FROM    debian:jessie
-MAINTAINER  Daniel Nephin <dnephin@gmail.com>
+MAINTAINER  Yvonnick Esnault <yvonnick@esnau.lt>
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 # TODO: review this dependency list
-RUN     DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
+RUN     apt-get update && apt-get install -y \
 	        git \
             apache2 \
             curl \
@@ -37,7 +40,6 @@ RUN     bash download.sh phabricator 5aca529980
 RUN     bash download.sh arcanist    1a2829d281
 RUN     bash download.sh libphutil   ce3959b404
 
-
 # Setup apache
 RUN     a2enmod rewrite
 ADD     phabricator.conf /etc/apache2/sites-available/phabricator.conf
@@ -49,7 +51,6 @@ RUN     ln -s /etc/apache2/sites-available/phabricator.conf \
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
 RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
-
 
 EXPOSE  80
 CMD     bash -c "source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
