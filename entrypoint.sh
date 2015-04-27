@@ -14,8 +14,4 @@ else
   echo "${LOCAL_JSON}" > /opt/phabricator/conf/local/local.json
 fi
 
-if [ "${1}" = "start-server" ]; then
-  exec bash -c "source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
-else
-  exec $@
-fi
+exec $@

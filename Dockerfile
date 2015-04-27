@@ -29,6 +29,7 @@ RUN     apt-get update && apt-get install -y \
             sendmail \
             subversion \
             tar \
+            daemontools \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # For some reason phabricator doesn't have tagged releases. To support
@@ -51,7 +52,10 @@ RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
 RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
 
+# Setup the services
+ADD services /services
+
 EXPOSE  80
 ADD     entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD     ["start-server"]
+CMD     ["svscan", "/services"]
