@@ -5,8 +5,7 @@
 FROM    debian:jessie
 MAINTAINER  Yvonnick Esnault <yvonnick@esnau.lt>
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV DEBCONF_NONINTERACTIVE_SEEN true
+ENV DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 
 # TODO: review this dependency list
 RUN     apt-get update && apt-get install -y \
@@ -32,7 +31,7 @@ RUN     apt-get update && apt-get install -y \
             tar \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# For some reason phabricator doesn't have tagged releases. To support 
+# For some reason phabricator doesn't have tagged releases. To support
 # repeatable builds use the latest SHA
 ADD     download.sh /opt/download.sh
 WORKDIR /opt
@@ -53,5 +52,6 @@ ADD     local.json /opt/phabricator/conf/local/local.json
 RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
 
 EXPOSE  80
-CMD     bash -c "source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
-
+ADD     entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD     ["start-server"]
