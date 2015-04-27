@@ -50,8 +50,10 @@ RUN     ln -s /etc/apache2/sites-available/phabricator.conf \
 # Setup phabricator
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
-RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
+RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini \
+          && ln -nsf /dev/stderr /var/log/apache2/error.log \
+          && ln -nsf /dev/stdout /var/log/apache2/access.log \
+          && ln -nsf /dev/stdout /var/log/apache2/other_vhosts_access.log
 
 EXPOSE  80
 CMD     bash -c "source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
-
