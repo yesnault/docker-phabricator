@@ -27,10 +27,29 @@ Go to http://localhost:8081
 
 
 
-Local Build and Run on osx
+Running on OSX
 -------
-docker-compose does not working yet on osx, please use http://www.fig.sh
+
+Requires
+
+  * boot2docker
+
+  * docker
+
+From a terminal, execute:
+
 ```
-fig -f docker-compose.yml up
+docker-compose up
 ```
-Go to http://localhost:8081
+
+and then execute
+
+```
+boot2docker ip
+```
+
+Then open up a browser and navigate to
+
+```
+http://{boot2docker ip}:8081
+```
