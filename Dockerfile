@@ -53,5 +53,5 @@ ADD     local.json /opt/phabricator/conf/local/local.json
 RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
 
 EXPOSE  80
-CMD     bash -c "source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
+CMD     bash -c "/opt/phabricator/bin/storage upgrade --force; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
 
