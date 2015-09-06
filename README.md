@@ -17,16 +17,6 @@ docker run -p 8081:80 --link databasePhabricator:database yesnault/docker-phabri
 ```
 Go to http://localhost:8081
 
-
-Local Build and Run
-----
-```
-docker-compose up -d
-```
-Go to http://localhost:8081
-
-
-
 Running on OSX
 -------
 
