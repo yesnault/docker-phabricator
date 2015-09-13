@@ -30,9 +30,10 @@ RUN     apt-get update && apt-get install -y \
             sendmail \
             subversion \
             tar \
+            sudo \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# For some reason phabricator doesn't have tagged releases. To support 
+# For some reason phabricator doesn't have tagged releases. To support
 # repeatable builds use the latest SHA
 ADD     download.sh /opt/download.sh
 WORKDIR /opt
@@ -51,7 +52,10 @@ RUN     ln -s /etc/apache2/sites-available/phabricator.conf \
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
 RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
+RUN     ln -s /usr/lib/git-core/git-http-backend /opt/phabricator/support/bin
+RUN     /opt/phabricator/bin/config set phd.user "root"
+RUN     echo "www-data ALL=(ALL) SETENV: NOPASSWD: /opt/phabricator/support/bin/git-http-backend" >> /etc/sudoers
 
 EXPOSE  80
-CMD     bash -c "/opt/phabricator/bin/storage upgrade --force; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
+CMD     bash -c "/opt/phabricator/bin/storage upgrade --force; /opt/phabricator/bin/phd start; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
 
