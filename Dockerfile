@@ -5,8 +5,7 @@
 FROM    debian:jessie
 MAINTAINER  Yvonnick Esnault <yvonnick@esnau.lt>
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV DEBCONF_NONINTERACTIVE_SEEN true
+ENV DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 
 # TODO: review this dependency list
 RUN     apt-get update && apt-get install -y \
@@ -59,5 +58,6 @@ RUN     /opt/phabricator/bin/config set phd.user "root"
 RUN     echo "www-data ALL=(ALL) SETENV: NOPASSWD: /opt/phabricator/support/bin/git-http-backend" >> /etc/sudoers
 
 EXPOSE  80
-CMD     bash -c "/opt/phabricator/bin/storage upgrade --force; /opt/phabricator/bin/phd start; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
-
+ADD     entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD     ["start-server"]
