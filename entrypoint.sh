@@ -15,7 +15,7 @@ else
 fi
 
 if [ "${1}" = "start-server" ]; then
-  exec bash -c "source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
+  exec bash -c "/opt/phabricator/bin/storage upgrade --force; /opt/phabricator/bin/phd start; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
 else
   exec $@
 fi
