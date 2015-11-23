@@ -51,7 +51,9 @@ RUN     ln -s /etc/apache2/sites-available/phabricator.conf \
 # Setup phabricator
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
-RUN     sed -i -e 's/post_max_size = 8M/post_max_size = 32M/' /etc/php5/apache2/php.ini
+RUN     sed -e 's/post_max_size = 8M/post_max_size = 32M/' \
+          -e 's/upload_max_filesize = 2M/upload_max_filesize = 32M/' \
+          -i /etc/php5/apache2/php.ini
 RUN     ln -s /usr/lib/git-core/git-http-backend /opt/phabricator/support/bin
 RUN     /opt/phabricator/bin/config set phd.user "root"
 RUN     echo "www-data ALL=(ALL) SETENV: NOPASSWD: /opt/phabricator/support/bin/git-http-backend" >> /etc/sudoers
