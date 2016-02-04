@@ -9,3 +9,4 @@ ft_min_word_len=3
 innodb_buffer_pool_size=410M
 ft_boolean_syntax=' |-><()~*:""&^'
 max_allowed_packet=33554432
+skip-name-resolve
