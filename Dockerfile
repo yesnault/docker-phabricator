@@ -35,10 +35,15 @@ RUN     apt-get update && apt-get install -y \
 # For some reason phabricator doesn't have tagged releases. To support
 # repeatable builds use the latest SHA
 ADD     download.sh /opt/download.sh
+
+ARG PHABRICATOR_COMMIT=79f2e81f38
+ARG ARCANIST_COMMIT=c304c4e045
+ARG LIBPHUTIL_COMMIT=55f554b618
+
 WORKDIR /opt
-RUN     bash download.sh phabricator 79f2e81f38
-RUN     bash download.sh arcanist    c304c4e045
-RUN     bash download.sh libphutil   55f554b618
+RUN     bash download.sh phabricator $PHABRICATOR_COMMIT
+RUN     bash download.sh arcanist    $ARCANIST_COMMIT
+RUN     bash download.sh libphutil   $LIBPHUTIL_COMMIT
 
 # Setup apache
 RUN     a2enmod rewrite
