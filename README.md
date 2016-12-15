@@ -20,7 +20,8 @@ Go to http://127.0.0.1:8080
 Running on OSX
 -------
 
-Docker for Mac
+
+###### Docker for Mac
 From a terminal, execute:
 
 ```
@@ -30,7 +31,7 @@ docker-compose up
 Go to http://127.0.0.1:8080
 
 
-Boot2 Docker
+###### Boot2 Docker
 
 Requires
 
