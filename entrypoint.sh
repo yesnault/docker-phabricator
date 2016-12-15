@@ -1,4 +1,5 @@
 #!/bin/sh
+until mysql --protocol=socket -uroot -pAgil1234 -e 'select 1' > /dev/null; do echo "Waiting for mysql..."; sleep 2; done
 
 if [ -z "${LOCAL_JSON}" ]; then
   [ -z "${MYSQL_HOST}" ] && export MYSQL_HOST="database"
@@ -15,6 +16,7 @@ else
 fi
 
 if [ "${1}" = "start-server" ]; then
+
   exec bash -c "/opt/phabricator/bin/storage upgrade --force; /opt/phabricator/bin/phd start; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
 else
   exec $@
