@@ -5,11 +5,13 @@
 #  - /var/repo - code repos
 #
 #
-phabricator:
-    build: .
-    links: ['database']
-    ports: ['8081:80']
-
 
 database:
     build: database/
+    hostname: database
+
+phabricator:
+    build: .
+    links: ['database']
+    ports: ['8080:80']
+
