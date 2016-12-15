@@ -13,16 +13,28 @@ docker run --name databasePhabricator yesnault/docker-phabricator-mysql
 
 Run phabricator :
 ```
-docker run -p 8081:80 --link databasePhabricator:database yesnault/docker-phabricator 
+docker run -p 8080:80 --link databasePhabricator:database yesnault/docker-phabricator 
 ```
-Go to http://localhost:8081
+Go to http://127.0.0.1:8080
 
 Running on OSX
 -------
 
+Docker for Mac
+From a terminal, execute:
+
+```
+docker-compose up
+```
+
+Go to http://127.0.0.1:8080
+
+
+Boot2 Docker
+
 Requires
 
-  * boot2docker
+  * Docker
 
   * docker
 
@@ -41,5 +53,5 @@ boot2docker ip
 Then open up a browser and navigate to
 
 ```
-http://{boot2docker ip}:8081
+http://{boot2docker ip}:8080
 ```
